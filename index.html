@@ -11,22 +11,69 @@
     <h1>My Portfolio</h1>
     <nav aria-label="Main navigation">
         <a href="index.html">Home</a>
-        <a href="about.html" aria-current="page">About</a>
+        <a href="about.html">About</a>
         <a href="contact.html">Contact</a>
     </nav>
+
+    <button
+    id="theme-toggle"
+    type="button"
+    aria-pressed="false"
+    aria-label="Switch to light theme">
+    ☀️ Light mode
+</button>
 </header>
 
-<main id="main">
-    <h2>About Me</h2>
-    <h1>Hello, I'm Mathivani!</h1>
-    <p>I'm a Computer Science Engineering student.</p>
-    <p>I'm learning programming and web development.</p>
-    <p>My goal is to build useful and accessible websites.</p>
+
+<main id="main" class="about-layout">
+    <h2 class="page-title">About Me</h2>
+
+    <section class="about-intro">
+        <h1>Hello, I'm Mathivani!</h1>
+        <p>I'm a Computer Science Engineering student.</p>
+        <p>I'm learning programming and web development.</p>
+    </section>
+
+    <section class="about-goals">
+        <h3>My Goal</h3>
+        <p>My goal is to build useful and accessible websites.</p>
+
+        <h3>My Interests</h3>
+        <p>I'm interested in programming, web development,
+        and creating user-friendly digital experiences.</p>
+    </section>
 </main>
+
 
 <footer>
     <p>&copy; 2026 My Portfolio</p>
 </footer>
+
+<script>
+    const themeToggle = document.getElementById("theme-toggle");
+
+    themeToggle.addEventListener("click", () => {
+        const isLight =
+            document.documentElement.getAttribute("data-theme") === "light";
+
+        if (isLight) {
+            document.documentElement.removeAttribute("data-theme");
+        } else {
+            document.documentElement.setAttribute("data-theme", "light");
+        }
+
+        themeToggle.textContent = isLight
+            ? "☀️ Light mode"
+            : "🌙 Dark mode";
+
+        themeToggle.setAttribute("aria-pressed", String(!isLight));
+
+        themeToggle.setAttribute(
+            "aria-label",
+            isLight ? "Switch to light theme" : "Switch to dark theme"
+        );
+    });
+</script>
 
 </body>
 </html>
