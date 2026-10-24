@@ -5,7 +5,9 @@
     box-sizing: border-box;
 }
 
+
 :root {
+    color-scheme: dark;
     --background: #080c16;
     --surface: #101827;
     --surface-light: #172235;
@@ -13,7 +15,28 @@
     --text: #f1f5f9;
     --muted: #a1aec2;
     --border: rgba(148, 163, 184, 0.18);
+    --header-bg: rgba(8, 12, 22, 0.96);
+    --input-bg: #0b1220;
+    --input-border: #2b3a50;
+    --shadow: 0 24px 70px rgba(0, 0, 0, 0.22);
 }
+
+[data-theme="light"] {
+    color-scheme: light;
+    --background: #f4f7fc;
+    --surface: #ffffff;
+    --surface-light: #eaf0fb;
+    --accent: #4338ca;
+    --text: #172033;
+    --muted: #536178;
+    --border: #dbe2ee;
+    --header-bg: rgba(255, 255, 255, 0.96);
+    --input-bg: #ffffff;
+    --input-border: #cbd5e1;
+    --shadow: 0 24px 70px rgba(35, 50, 80, 0.10);
+}
+
+
 
 html {
     scroll-behavior: smooth;
@@ -63,7 +86,7 @@ header {
     gap: 24px;
     padding: 22px 8%;
     border-bottom: 1px solid var(--border);
-    background: rgba(8, 12, 22, 0.96);
+    background: var(--header-bg);
 }
 
 header h1 {
@@ -103,7 +126,7 @@ main {
         var(--surface);
     border: 1px solid var(--border);
     border-radius: 20px;
-    box-shadow: 0 24px 70px rgba(0, 0, 0, 0.22);
+    box-shadow: var(--shadow);
 }
 
 h2 {
@@ -151,8 +174,8 @@ input,
 textarea {
     width: 100%;
     padding: 14px 16px;
-    background: #0b1220;
-    border: 1px solid #2b3a50;
+    background: var(--input-bg);
+border: 1px solid var(--input-border);
     border-radius: 9px;
     color: var(--text);
     font: inherit;
@@ -247,5 +270,134 @@ footer {
     *::after {
         transition-duration: 0.01ms !important;
         animation-duration: 0.01ms !important;
+    }
+}
+
+/* ===== TASK 2: ADVANCED RESPONSIVE DESIGN ===== */
+
+/* Make layouts adapt smoothly */
+html {
+    scroll-padding-top: 20px;
+}
+
+body {
+    overflow-wrap: break-word;
+}
+
+header,
+main,
+footer {
+    min-width: 0;
+}
+
+/* Tablet screens */
+@media (min-width: 651px) and (max-width: 900px) {
+    header {
+        padding: 22px 5%;
+        gap: 16px;
+    }
+
+    nav {
+        gap: 16px;
+    }
+
+    main {
+        width: calc(100% - 48px);
+        margin: 45px auto;
+        padding: 32px;
+    }
+}
+
+/* Large desktop screens */
+@media (min-width: 1200px) {
+    header {
+        padding-inline: max(8%, calc((100% - 1100px) / 2));
+    }
+
+    main {
+        padding: 55px;
+    }
+}
+
+/* Small mobile screens */
+@media (max-width: 400px) {
+    header {
+        padding: 18px 14px;
+        gap: 16px;
+    }
+
+    header h1 {
+        font-size: 21px;
+    }
+
+    nav {
+        gap: 14px;
+    }
+
+    nav a {
+        font-size: 13px;
+    }
+
+    main {
+        width: calc(100% - 24px);
+        padding: 22px 16px;
+        margin-block: 24px;
+    }
+
+    h2 {
+        font-size: 28px;
+    }
+}
+
+/* Make images and embedded content responsive */
+img,
+video,
+iframe {
+    max-width: 100%;
+}
+
+/* Better touch interaction */
+button,
+nav a {
+    touch-action: manipulation;
+}
+
+/* CSS Grid layout */
+.about-layout {
+    display: grid;
+    grid-template-columns: minmax(0, 1.2fr) minmax(0, 0.8fr);
+    gap: 24px;
+    align-items: start;
+}
+
+.about-layout .page-title {
+    grid-column: 1 / -1;
+    margin-bottom: 0;
+}
+
+.about-layout section {
+    min-width: 0;
+    padding: 24px;
+    background: var(--surface-light);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+}
+
+.about-layout section h3 {
+    margin-bottom: 12px;
+}
+
+@media (max-width: 650px) {
+    .about-layout {
+        grid-template-columns: minmax(0, 1fr);
+        gap: 16px;
+    }
+
+    .about-layout .page-title {
+        grid-column: auto;
+    }
+
+    .about-layout section {
+        padding: 20px;
     }
 }
